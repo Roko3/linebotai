@@ -55,16 +55,21 @@ def handle_message(event):
 
   # ユーザ情報を取得する
   profile = linebot_api.get_profile(event.source.user_id)
-  print(profile.display_name)        # 表示名
+  name = profile.display_name + "さん"        # 表示名
   print(profile.user_id)             # ユーザーID
   print(profile.picture_url)         # 画像のURL
   print(profile.status_message)      # ステータスメッセージ
 
-  # AIとの返信メッセージ
-  ai_message = talk_ai(event.message.text)
+  if "Akari" in name or "Hiroki" in name or "Ty" in name:
 
-  # 返信
-  linebot_api.reply_message(event.reply_token, TextSendMessage(text = ai_message))
+    # AIとの返信メッセージ
+    ai_message = talk_ai(event.message.text)
+
+    # 返信
+    linebot_api.reply_message(event.reply_token, [
+                                                    TextSendMessage(text = name),
+                                                    TextSendMessage(text = ai_message),
+                                                  ])
 
 
 
