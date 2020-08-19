@@ -12,6 +12,9 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import pya3rt
+import random
+
+RANDAM = 3
 
 app = Flask(__name__)
 
@@ -61,15 +64,16 @@ def handle_message(event):
   print(profile.status_message)      # ステータスメッセージ
 
   if "Akari" in name or "Hiroki" in name or "Ty" in name:
+    if random.randrange(RANDAM) == 0:       # ランダムに返信する
 
-    # AIとの返信メッセージ
-    ai_message = talk_ai(event.message.text)
+      # AIとの返信メッセージ
+      ai_message = talk_ai(event.message.text)
 
-    # 返信
-    linebot_api.reply_message(event.reply_token, [
-                                                    TextSendMessage(text = name),
-                                                    TextSendMessage(text = ai_message),
-                                                  ])
+      # 返信
+      linebot_api.reply_message(event.reply_token, [
+                                                      TextSendMessage(text = name),
+                                                      TextSendMessage(text = ai_message),
+                                                    ])
 
 
 
