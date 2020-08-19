@@ -55,7 +55,7 @@ def handle_message(event):
 
   # ユーザ情報を取得する
   profile = linebot_api.get_profile(event.source.user_id)
-  name = profile.display_name + "さん"        # 表示名
+  name = profile.display_name + "さん\uDBC0\uDC78"        # 表示名
   print(profile.user_id)             # ユーザーID
   print(profile.picture_url)         # 画像のURL
   print(profile.status_message)      # ステータスメッセージ
