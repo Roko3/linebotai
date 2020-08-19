@@ -44,7 +44,7 @@ def callback():
     abort(400)
 
   return 'OK'
-  
+
 #*****************************************************
 # イベントハンドラー
 #*****************************************************
@@ -54,7 +54,7 @@ def handle_message(event):
   print(event.message.text)
 
   # ユーザ情報を取得する
-  profile = line_bot_api.get_profile(event.source.user_id)
+  profile = linebot_api.get_profile(event.source.user_id)
   print(profile.display_name)        #-> 表示名
   print(profile.user_id)             #-> ユーザーID
   print(profile.image_url)           #-> 画像のURL
