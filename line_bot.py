@@ -44,15 +44,33 @@ def callback():
     abort(400)
 
   return 'OK'
-
+  
+#*****************************************************
+# イベントハンドラー
+#*****************************************************
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
     
   print(event.message.text)
+
+  # ユーザ情報を取得する
+  profile = line_bot_api.get_profile(event.source.user_id)
+  print(profile.display_name)        #-> 表示名
+  print(profile.user_id)             #-> ユーザーID
+  print(profile.image_url)           #-> 画像のURL
+  print(profile.status_message)      #-> ステータスメッセージ
+
+  # AIとの返信メッセージ
   ai_message = talk_ai(event.message.text)
 
+  # 返信
   linebot_api.reply_message(event.reply_token, TextSendMessage(text = ai_message))
 
+
+
+#*****************************************************
+# AIから返信を取得する
+#*****************************************************
 def talk_ai(word):
   apikey = "DZZRDEzj6wXxRkI6CZB2ziJz69TcOR6h"
   client = pya3rt.TalkClient(apikey)
